@@ -55,7 +55,6 @@
             font-family: 'Inter', sans-serif;
             font-size: 16px;
             line-height: 1.5;
-            transition: background 0.3s ease;
             background-image: url('https://images.pexels.com/photos/235985/pexels-photo-235985.jpeg?auto=compress&cs=tinysrgb&w=1600');
             background-size: cover;
             background-position: center;
@@ -77,7 +76,6 @@
         
         body.dark::before { background-color: rgba(0, 0, 0, 0.7); }
         
-        /* ============ СКРЫВАЮЩАЯСЯ ШАПКА ============ */
         .header {
             background: var(--header-bg);
             padding: 16px 48px;
@@ -87,50 +85,41 @@
             flex-wrap: wrap;
             gap: 20px;
             border-bottom: 1px solid var(--border-color);
-            position: fixed;
+            position: sticky;
             top: 0;
-            left: 0;
-            right: 0;
             z-index: 1000;
             box-shadow: 0 2px 12px var(--shadow);
-            transition: transform 0.3s ease, background 0.3s ease;
-            transform: translateY(0);
-        }
-        .header.hidden { transform: translateY(-100%); }
-        .header:hover { transform: translateY(0); }
-        
-        .scroll-indicator {
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 3px;
-            background: var(--accent);
-            width: 0%;
-            z-index: 1002;
-            transition: width 0.1s ease;
         }
         
-        .menu-toggle-btn {
-            position: fixed;
-            top: 15px;
-            left: 15px;
-            background: var(--accent);
-            color: white;
+        /* Кнопка сворачивания навигации */
+        .nav-toggle-btn {
+            background: none;
             border: none;
-            width: 48px;
-            height: 48px;
-            border-radius: 50%;
-            font-size: 24px;
+            font-size: 16px;
             cursor: pointer;
-            z-index: 1001;
-            display: none;
-            align-items: center;
-            justify-content: center;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+            color: var(--accent);
+            padding: 8px 16px;
+            transition: 0.2s;
+            font-weight: 500;
+            border-radius: 40px;
+        }
+        .nav-toggle-btn:hover {
+            background: var(--accent-light);
         }
         
-        .container { max-width: 1400px; margin: 0 auto; padding: 100px 48px 40px 48px; min-height: 60vh; }
+        /* Сворачиваемая область */
+        .nav-collapsible {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            gap: 20px;
+            transition: 0.3s ease;
+        }
+        .nav-collapsible.collapsed {
+            display: none;
+        }
+        
+        .container { max-width: 1400px; margin: 0 auto; padding: 40px 48px; min-height: 60vh; }
         
         .logo { font-size: 28px; font-weight: 600; color: var(--accent); cursor: pointer; font-family: 'Playfair Display', serif; }
         .logo span { font-weight: 400; color: var(--text-muted); }
@@ -215,7 +204,6 @@
         .quote-text { font-size: 22px; font-family: 'Playfair Display', serif; color: var(--text-primary); line-height: 1.4; margin-bottom: 16px; }
         .quote-author { color: var(--accent); font-weight: 500; }
         
-        /* Детальная страница книги */
         .product-detail {
             background: var(--bg-card);
             border-radius: 28px;
@@ -244,7 +232,6 @@
         .btn-back { background: var(--btn-outline-bg); color: var(--btn-outline-text); padding: 12px 32px; border-radius: 40px; border: none; cursor: pointer; font-weight: 600; margin-bottom: 28px; font-size: 15px; transition: 0.2s; }
         .btn-back:hover { background: var(--border-color); }
         
-        /* Отзывы */
         .reviews-section { margin-top: 48px; background: var(--bg-card); border-radius: 28px; padding: 40px; border: 1px solid var(--border-color); }
         .reviews-title { font-size: 26px; font-weight: 600; margin-bottom: 28px; color: var(--text-primary); font-family: 'Playfair Display', serif; }
         .review-card { background: var(--bg-secondary); border-radius: 20px; padding: 24px; margin-bottom: 20px; border: 1px solid var(--border-color); }
@@ -257,7 +244,6 @@
         .star.selected, .star:hover { color: var(--star-color); }
         .add-review textarea { width: 100%; padding: 16px; border: 1px solid var(--border-color); border-radius: 20px; font-family: 'Inter', sans-serif; margin: 15px 0; background: var(--input-bg); color: var(--text-primary); font-size: 15px; }
         
-        /* О нас - ПОЛНЫЙ КРАСИВЫЙ ВИД */
         .unified-card { background: var(--bg-card); border-radius: 28px; overflow: hidden; border: 1px solid var(--border-color); margin-top: 20px; }
         .shop-info { background: var(--accent-light); padding: 40px 48px; border-bottom: 1px solid var(--border-color); }
         .shop-info h2 { font-size: 32px; font-weight: 500; color: var(--accent); margin-bottom: 20px; font-family: 'Playfair Display', serif; }
@@ -275,7 +261,6 @@
         .dev-table td:first-child { font-weight: 600; color: var(--accent); width: 38%; }
         .copyright { text-align: center; margin-top: 35px; padding-top: 20px; border-top: 1px solid var(--border-color); color: var(--text-muted); font-size: 14px; }
         
-        /* Поддержка - ПОЛНЫЙ КРАСИВЫЙ ВИД */
         .support-form { background: var(--bg-card); border-radius: 28px; padding: 48px; border: 1px solid var(--border-color); max-width: 700px; margin: 0 auto; }
         .support-form h3 { font-size: 26px; font-weight: 600; margin-bottom: 12px; color: var(--text-primary); font-family: 'Playfair Display', serif; }
         .support-form p { margin-bottom: 24px; color: var(--text-secondary); }
@@ -308,12 +293,13 @@
         .footer { background: var(--footer-bg); padding: 32px 48px; text-align: center; border-top: 1px solid var(--border-color); margin-top: 70px; color: var(--text-muted); font-size: 14px; }
         
         @media (max-width: 800px) {
-            .container { padding: 80px 20px 24px 20px; }
-            .header { padding: 12px 20px; flex-direction: column; max-height: 80vh; overflow-y: auto; }
-            .header .nav { flex-direction: column; align-items: center; gap: 12px; }
-            .header .search { order: -1; width: 100%; }
-            .header .search input { flex: 1; }
-            .header .user-links { flex-wrap: wrap; justify-content: center; }
+            .container { padding: 20px; }
+            .header { padding: 12px 20px; flex-wrap: wrap; }
+            .nav-collapsible { flex-direction: column; width: 100%; }
+            .nav { flex-direction: column; align-items: center; gap: 12px; }
+            .search { width: 100%; }
+            .search input { flex: 1; }
+            .user-links { flex-wrap: wrap; justify-content: center; }
             .hero-slider { height: 280px; }
             .slide { padding: 24px; }
             .slide-content h2 { font-size: 28px; }
@@ -322,35 +308,34 @@
             .product-detail { flex-direction: column; padding: 28px; }
             .detail-image { flex: auto; }
             .delivery-row { grid-template-columns: 1fr; }
-            .menu-toggle-btn { display: flex; }
         }
     </style>
 </head>
 <body>
 
-<div class="scroll-indicator" id="scrollIndicator"></div>
-<button class="menu-toggle-btn" id="menuToggleBtn" onclick="toggleMobileMenu()">☰</button>
-
-<div class="header" id="mainHeader">
+<div class="header">
     <div class="logo" onclick="navigate('home')">STORY<span>FOLK</span></div>
-    <div class="nav">
-        <a onclick="navigate('home')">Главная</a>
-        <a onclick="navigate('catalog')">Каталог</a>
-        <a onclick="navigate('new')">Новинки</a>
-        <a onclick="navigate('sale')">Акции</a>
-        <a onclick="navigate('about')">О нас</a>
-        <a onclick="navigate('support')">Поддержка</a>
+    <div class="nav-collapsible" id="navCollapsible">
+        <div class="nav">
+            <a onclick="navigate('home')">Главная</a>
+            <a onclick="navigate('catalog')">Каталог</a>
+            <a onclick="navigate('new')">Новинки</a>
+            <a onclick="navigate('sale')">Акции</a>
+            <a onclick="navigate('about')">О нас</a>
+            <a onclick="navigate('support')">Поддержка</a>
+        </div>
+        <div class="search">
+            <input type="text" id="searchInput" placeholder="Поиск книг...">
+            <button onclick="searchBooks()">Найти</button>
+        </div>
+        <div class="user-links" id="userLinks">
+            <a onclick="navigate('login')">Вход</a>
+            <a onclick="navigate('register')">Регистрация</a>
+            <a onclick="navigate('cart')" class="cart-link">🛒 (<span id="cartCount">0</span>)</a>
+            <button class="theme-toggle" onclick="toggleTheme()">🌓 Тема</button>
+        </div>
     </div>
-    <div class="search">
-        <input type="text" id="searchInput" placeholder="Поиск книг...">
-        <button onclick="searchBooks()">Найти</button>
-    </div>
-    <div class="user-links" id="userLinks">
-        <a onclick="navigate('login')">Вход</a>
-        <a onclick="navigate('register')">Регистрация</a>
-        <a onclick="navigate('cart')" class="cart-link">🛒 (<span id="cartCount">0</span>)</a>
-        <button class="theme-toggle" onclick="toggleTheme()">🌓 Тема</button>
-    </div>
+    <button class="nav-toggle-btn" id="navToggleBtn" onclick="toggleNavigation()">▲ Свернуть</button>
 </div>
 
 <div class="container" id="content"></div>
@@ -380,22 +365,22 @@ const products = [
     { id: 2, title: 'Золотая клетка. Плен', author: 'Индира Искендер, 2025', genre: 'романтика', price: 14.41, old_price: 24.02, rating: 4.82, reviews: 48, image: 'prod2.jpg', is_new: false, is_sale: true, description: 'Пронзительная история о девушке, заключившей контракт с богатым наследником. Роскошный особняк, бриллианты и власть оказываются ловушкой для её сердца. Постепенно главная героиня понимает, что истинная свобода — не в материальных благах, а в праве выбора.' },
     { id: 3, title: 'Каляндар настольны на 2026', author: 'Канцылярская фабрыка, 2025', genre: 'хобби', price: 27.44, old_price: 68.60, rating: 4.82, reviews: 48, image: 'prod3.jpg', is_new: false, is_sale: true, description: 'Эксклюзивный настольный календарь на 2026 год, созданный белорусскими художниками. Каждый месяц сопровождается уникальной иллюстрацией с национальными орнаментами. Плотная мелованная бумага, тиснение фольгой и удобная подставка.' },
     { id: 4, title: 'Гностические мистерии Пистис Софии', author: 'Ян ван Рэйкенборг, 2024', genre: 'философия', price: 42.96, old_price: 48.27, rating: 4.90, reviews: 23, image: 'prod4.jpg', is_new: true, is_sale: true, description: 'Фундаментальное исследование одного из самых загадочных гностических текстов раннего христианства. Автор анализирует миф о падении и восхождении Софии через призму юнгианской психологии.' },
-    { id: 5, title: 'Мастер и Маргарита', author: 'Михаил Булгаков, 1967', genre: 'классика', price: 25.00, old_price: 0, rating: 4.95, reviews: 156, image: 'book1.jpg', is_new: false, is_sale: false, description: 'Великий роман Михаила Булгакова — многослойная сатира, мистическая драма и история вечной любви. Воланд со своей свитой прибывает в Москву 1930-х годов, обнажая пороки советского общества. Параллельно разворачивается ершалаимская линия о Понтии Пилате и Иешуа.' },
-    { id: 6, title: '451° по Фаренгейту', author: 'Рэй Брэдбери, 1953', genre: 'фантастика', price: 22.00, old_price: 0, rating: 4.88, reviews: 92, image: 'book2.jpg', is_new: true, is_sale: false, description: 'Классическая антиутопия о мире, где книги запрещены, а пожарные сжигают любые печатные источники знаний. Главный герой — пожарный Монтэг — начинает сомневаться в правильности своей работы.' },
-    { id: 7, title: 'Гарри Поттер и философский камень', author: 'Джоан Роулинг, 1997', genre: 'фэнтези', price: 30.00, old_price: 45.00, rating: 4.97, reviews: 234, image: 'book3.jpg', is_new: false, is_sale: true, description: 'Первая книга легендарной серии о мальчике, который выжил. Гарри Поттер узнаёт, что он волшебник, и поступает в Хогвартс — школу чародейства и волшебства. Там его ждут верные друзья Рон и Гермиона.' },
-    { id: 8, title: '1984', author: 'Джордж Оруэлл, 1949', genre: 'антиутопия', price: 23.00, old_price: 0, rating: 4.92, reviews: 178, image: 'book5.jpg', is_new: false, is_sale: false, description: 'Мрачное предупреждение о тоталитарном обществе, где Большой Брат следит за каждым шагом. Уинстон Смит работает в Министерстве правды, переписывая историю, но втайне мечтает о свободе.' },
-    { id: 9, title: 'Цветы для Элджернона', author: 'Дэниел Киз, 1959', genre: 'драма', price: 27.00, old_price: 38.00, rating: 4.89, reviews: 67, image: 'book6.jpg', is_new: false, is_sale: true, description: 'Трогательный роман в дневниковой форме о мужчине с низким IQ, который становится подопытным в эксперименте по повышению интеллекта. Чарли Гордон превращается в гения, но с ужасом осознаёт, что эффект обратим.' },
-    { id: 10, title: 'Дюна', author: 'Фрэнк Герберт, 1965', genre: 'фантастика', price: 35.00, old_price: 0, rating: 4.85, reviews: 112, image: 'book7.jpg', is_new: false, is_sale: false, description: 'Эпическая сага о пустынной планете Арракис — единственном источнике меланжа, самой ценной субстанции во Вселенной. Молодой Пол Атрейдес вынужден бежать после предательства и найти убежище среди фрименов.' },
-    { id: 11, title: 'Война и мир', author: 'Лев Толстой, 1869', genre: 'классика', price: 28.00, old_price: 0, rating: 4.91, reviews: 203, image: 'book8.jpg', is_new: true, is_sale: false, description: 'Величайшее произведение Льва Толстого, охватывающее пятнадцатилетний период истории России (1805–1820). На фоне наполеоновских войн разворачиваются судьбы Андрея Болконского, Пьера Безухова и Наташи Ростовой.' },
-    { id: 12, title: 'Портрет Дориана Грея', author: 'Оскар Уайльд, 1890', genre: 'классика', price: 21.00, old_price: 0, rating: 4.87, reviews: 88, image: 'book9.jpg', is_new: false, is_sale: false, description: 'Единственный роман Оскара Уайльда, вызвавший скандал в викторианском обществе. Красавец Дориан Грей загадывает желание оставаться вечно молодым, пока его портрет стареет и собирает все последствия его грехов.' },
-    { id: 13, title: 'Оно', author: 'Стивен Кинг, 1986', genre: 'ужасы', price: 32.00, old_price: 48.00, rating: 4.79, reviews: 145, image: 'horror1.jpg', is_new: false, is_sale: true, description: 'Легендарный роман ужасов о чудовище, которое просыпается в городке Дерри каждые 27 лет. Клоун Пеннивайз питается детскими страхами, принимая облик самого жуткого для жертвы существа.' },
-    { id: 14, title: 'Гордость и предубеждение', author: 'Джейн Остин, 1813', genre: 'романтика', price: 19.50, old_price: 0, rating: 4.94, reviews: 210, image: 'pride.jpg', is_new: false, is_sale: false, description: 'Изысканный роман нравов о семье Беннет, где пять дочерей ищут выгодные партии. Остроумная Элизабет Беннет и гордый мистер Дарси проходят через взаимные заблуждения и предрассудки.' },
-    { id: 15, title: 'Ведьмак. Последнее желание', author: 'Анджей Сапковский, 1993', genre: 'фэнтези', price: 32.00, old_price: 0, rating: 4.93, reviews: 267, image: 'the_witcher.jpg', is_new: true, is_sale: false, description: 'Первый сборник рассказов о ведьмаке Геральте из Ривии — мутанте, созданном для убийства монстров. В отличие от стереотипов, Геральт часто оказывается перед моральным выбором.' },
-    { id: 16, title: 'Три товарища', author: 'Эрих Мария Ремарк, 1936', genre: 'драма', price: 26.50, old_price: 0, rating: 4.96, reviews: 189, image: 'three_comrades.jpg', is_new: false, is_sale: false, description: 'Роман о дружбе, любви и потерях в Германии между двумя мировыми войнами. Роберт, Отто и Готтфрид — бывшие фронтовики, пытающиеся сохранить человеческое достоинство.' },
-    { id: 17, title: 'Убийство в "Восточном экспрессе"', author: 'Агата Кристи, 1934', genre: 'детектив', price: 24.90, old_price: 0, rating: 4.89, reviews: 142, image: 'murder_on_orient_express.jpg', is_new: false, is_sale: true, description: 'Один из самых известных романов королевы детектива. Бельгийский сыщик Эркюль Пуаро путешествует на роскошном поезде "Восточный экспресс", который застревает в снегах.' },
-    { id: 18, title: 'Алиса в Стране чудес', author: 'Льюис Кэрролл, 1865', genre: 'классика', price: 20.00, old_price: 0, rating: 4.85, reviews: 198, image: 'alice.jpg', is_new: true, is_sale: false, description: 'Бессмертная сказка, полная абсурда, математических шуток и философских парадоксов. Алиса проваливается в кроличью нору и попадает в мир, где физика и логика работают по своим странным законам.' },
-    { id: 19, title: 'Комедии. Ревизор', author: 'Николай Гоголь, 1836', genre: 'комедия', price: 18.00, old_price: 0, rating: 4.83, reviews: 96, image: 'gogol.jpg', is_new: false, is_sale: false, description: 'Бессмертная сатирическая комедия о чиновниках уездного города, которые принимают проезжего петербургского чиновника за ревизора. Хлестаков, мелкий чиновник, случайно пользуется ситуацией.' },
-    { id: 20, title: '12 стульев', author: 'Ильф и Петров, 1928', genre: 'комедия', price: 24.00, old_price: 35.00, rating: 4.90, reviews: 112, image: 'chairs.jpg', is_new: false, is_sale: true, description: 'Блистательная сатирическая одиссея по Советской России эпохи НЭПа. "Великий комбинатор" Остап Бендер вместе с Кисой Воробьяниновым ищут бриллианты, спрятанные в одном из двенадцати стульев гостиного гарнитура.' }
+    { id: 5, title: 'Мастер и Маргарита', author: 'Михаил Булгаков, 1967', genre: 'классика', price: 25.00, old_price: 0, rating: 4.95, reviews: 156, image: 'book1.jpg', is_new: false, is_sale: false, description: 'Великий роман Михаила Булгакова — многослойная сатира, мистическая драма и история вечной любви. Воланд со своей свитой прибывает в Москву 1930-х годов, обнажая пороки советского общества.' },
+    { id: 6, title: '451° по Фаренгейту', author: 'Рэй Брэдбери, 1953', genre: 'фантастика', price: 22.00, old_price: 0, rating: 4.88, reviews: 92, image: 'book2.jpg', is_new: true, is_sale: false, description: 'Классическая антиутопия о мире, где книги запрещены, а пожарные сжигают любые печатные источники знаний.' },
+    { id: 7, title: 'Гарри Поттер и философский камень', author: 'Джоан Роулинг, 1997', genre: 'фэнтези', price: 30.00, old_price: 45.00, rating: 4.97, reviews: 234, image: 'book3.jpg', is_new: false, is_sale: true, description: 'Первая книга легендарной серии о мальчике, который выжил. Гарри Поттер узнаёт, что он волшебник, и поступает в Хогвартс.' },
+    { id: 8, title: '1984', author: 'Джордж Оруэлл, 1949', genre: 'антиутопия', price: 23.00, old_price: 0, rating: 4.92, reviews: 178, image: 'book5.jpg', is_new: false, is_sale: false, description: 'Мрачное предупреждение о тоталитарном обществе, где Большой Брат следит за каждым шагом.' },
+    { id: 9, title: 'Цветы для Элджернона', author: 'Дэниел Киз, 1959', genre: 'драма', price: 27.00, old_price: 38.00, rating: 4.89, reviews: 67, image: 'book6.jpg', is_new: false, is_sale: true, description: 'Трогательный роман в дневниковой форме о мужчине с низким IQ, который становится подопытным в эксперименте.' },
+    { id: 10, title: 'Дюна', author: 'Фрэнк Герберт, 1965', genre: 'фантастика', price: 35.00, old_price: 0, rating: 4.85, reviews: 112, image: 'book7.jpg', is_new: false, is_sale: false, description: 'Эпическая сага о пустынной планете Арракис — единственном источнике меланжа.' },
+    { id: 11, title: 'Война и мир', author: 'Лев Толстой, 1869', genre: 'классика', price: 28.00, old_price: 0, rating: 4.91, reviews: 203, image: 'book8.jpg', is_new: true, is_sale: false, description: 'Величайшее произведение Льва Толстого, охватывающее события наполеоновских войн.' },
+    { id: 12, title: 'Портрет Дориана Грея', author: 'Оскар Уайльд, 1890', genre: 'классика', price: 21.00, old_price: 0, rating: 4.87, reviews: 88, image: 'book9.jpg', is_new: false, is_sale: false, description: 'Единственный роман Оскара Уайльда о красоте, морали и бессмертии.' },
+    { id: 13, title: 'Оно', author: 'Стивен Кинг, 1986', genre: 'ужасы', price: 32.00, old_price: 48.00, rating: 4.79, reviews: 145, image: 'horror1.jpg', is_new: false, is_sale: true, description: 'Легендарный роман ужасов о чудовище, которое просыпается в городке Дерри.' },
+    { id: 14, title: 'Гордость и предубеждение', author: 'Джейн Остин, 1813', genre: 'романтика', price: 19.50, old_price: 0, rating: 4.94, reviews: 210, image: 'pride.jpg', is_new: false, is_sale: false, description: 'Изысканный роман нравов о семье Беннет.' },
+    { id: 15, title: 'Ведьмак. Последнее желание', author: 'Анджей Сапковский, 1993', genre: 'фэнтези', price: 32.00, old_price: 0, rating: 4.93, reviews: 267, image: 'the_witcher.jpg', is_new: true, is_sale: false, description: 'Первый сборник рассказов о ведьмаке Геральте из Ривии.' },
+    { id: 16, title: 'Три товарища', author: 'Эрих Мария Ремарк, 1936', genre: 'драма', price: 26.50, old_price: 0, rating: 4.96, reviews: 189, image: 'three_comrades.jpg', is_new: false, is_sale: false, description: 'Роман о дружбе, любви и потерях в Германии между двумя мировыми войнами.' },
+    { id: 17, title: 'Убийство в "Восточном экспрессе"', author: 'Агата Кристи, 1934', genre: 'детектив', price: 24.90, old_price: 0, rating: 4.89, reviews: 142, image: 'murder_on_orient_express.jpg', is_new: false, is_sale: true, description: 'Эркюль Пуаро расследует убийство в роскошном поезде.' },
+    { id: 18, title: 'Алиса в Стране чудес', author: 'Льюис Кэрролл, 1865', genre: 'классика', price: 20.00, old_price: 0, rating: 4.85, reviews: 198, image: 'alice.jpg', is_new: true, is_sale: false, description: 'Бессмертная сказка о приключениях Алисы в мире чудес.' },
+    { id: 19, title: 'Комедии. Ревизор', author: 'Николай Гоголь, 1836', genre: 'комедия', price: 18.00, old_price: 0, rating: 4.83, reviews: 96, image: 'gogol.jpg', is_new: false, is_sale: false, description: 'Сатирическая комедия о чиновниках, которые принимают проезжего за ревизора.' },
+    { id: 20, title: '12 стульев', author: 'Ильф и Петров, 1928', genre: 'комедия', price: 24.00, old_price: 35.00, rating: 4.90, reviews: 112, image: 'chairs.jpg', is_new: false, is_sale: true, description: 'Остап Бендер ищет бриллианты, спрятанные в одном из двенадцати стульев.' }
 ];
 
 // ОТЗЫВЫ
@@ -465,6 +450,22 @@ function renderProductsGrid(items) {
     html += '</div>'; return html;
 }
 
+// СВОРАЧИВАНИЕ НАВИГАЦИИ
+let isNavCollapsed = false;
+
+function toggleNavigation() {
+    const navBlock = document.getElementById('navCollapsible');
+    const toggleBtn = document.getElementById('navToggleBtn');
+    if (isNavCollapsed) {
+        navBlock.classList.remove('collapsed');
+        toggleBtn.innerHTML = '▲ Свернуть';
+    } else {
+        navBlock.classList.add('collapsed');
+        toggleBtn.innerHTML = '▼ Развернуть';
+    }
+    isNavCollapsed = !isNavCollapsed;
+}
+
 // ДЕТАЛЬНАЯ СТРАНИЦА КНИГИ
 function viewProduct(id) {
     const product = products.find(p => p.id == id);
@@ -498,9 +499,7 @@ function viewProduct(id) {
     const detailHtml = `
         <button class="btn-back" onclick="goBack()">← Назад к каталогу</button>
         <div class="product-detail">
-            <div class="detail-image">
-                <img src="${product.image}" onerror="this.src='https://placehold.co/300x400?text=Книга'">
-            </div>
+            <div class="detail-image"><img src="${product.image}" onerror="this.src='https://placehold.co/300x400?text=Книга'"></div>
             <div class="detail-info">
                 <div class="detail-title">${escapeHtml(product.title)}</div>
                 <div class="detail-author">${escapeHtml(product.author)}</div>
@@ -633,7 +632,6 @@ function showSlide(index) {
 function changeSlide(d) { let newIndex = currentSlide + d; if (newIndex >= slidesData.length) newIndex = 0; if (newIndex < 0) newIndex = slidesData.length - 1; showSlide(newIndex); }
 function attachDotEvents() { document.querySelectorAll('.dot').forEach((dot, i) => { dot.addEventListener('click', () => { showSlide(i); if (slideInterval) { clearInterval(slideInterval); startSlider(); } }); }); }
 
-// О НАС - ПОЛНЫЙ КРАСИВЫЙ ВИД
 function renderAboutUnified() {
     return `<h1>О магазине</h1>
     <div class="unified-card">
@@ -650,26 +648,14 @@ function renderAboutUnified() {
         <div class="developer-section">
             <h3>Разработчик проекта</h3>
             <div class="dev-grid">
-                <div class="dev-photo">
-                    <img src="19.jpg" alt="Фото разработчика" onerror="this.src='https://placehold.co/150x150?text=Фото'">
-                    <p>Моисеева Ксения</p>
-                </div>
-                <div class="dev-info">
-                    <table class="dev-table">
-                        <tr><td style="color:var(--accent); font-weight:600;">Код специальности</td><td>5-04-0612-02 «Разработка и сопровождение программного обеспечения информационных технологий»</td></tr>
-                        <tr><td style="color:var(--accent); font-weight:600;">Код разработчика</td><td>19</td></tr>
-                        <tr><td style="color:var(--accent); font-weight:600;">ФИО</td><td>Моисеева Ксения Юрьевна</td></tr>
-                        <tr><td style="color:var(--accent); font-weight:600;">Тема сайта</td><td>Интернет-магазин книг StoryFolk</td></tr>
-                        <tr><td style="color:var(--accent); font-weight:600;">Дата создания</td><td>04.05.2026</td></tr>
-                    </table>
-                </div>
+                <div class="dev-photo"><img src="19.jpg" onerror="this.src='https://placehold.co/150x150?text=Фото'"><p>Моисеева Ксения</p></div>
+                <div class="dev-info"><table class="dev-table"><tr><td style="color:var(--accent); font-weight:600;">Код специальности</td><td>5-04-0612-02 «Разработка и сопровождение ПО»</td></tr><tr><td style="color:var(--accent); font-weight:600;">Код разработчика</td><td>19</td></tr><tr><td style="color:var(--accent); font-weight:600;">ФИО</td><td>Моисеева Ксения Юрьевна</td></tr><tr><td style="color:var(--accent); font-weight:600;">Тема сайта</td><td>Интернет-магазин книг StoryFolk</td></tr><tr><td style="color:var(--accent); font-weight:600;">Дата создания</td><td>04.05.2026</td></tr></table></div>
             </div>
             <div class="copyright">© 2026 Моисеева Ксения. Все права защищены.</div>
         </div>
     </div>`;
 }
 
-// ПОДДЕРЖКА - ПОЛНЫЙ КРАСИВЫЙ ВИД
 function renderSupportPage() {
     let ticketsHtml = '';
     const userTickets = supportTickets.filter(t => currentUser && t.userId === currentUser.login);
@@ -678,12 +664,7 @@ function renderSupportPage() {
         userTickets.slice().reverse().forEach(t => {
             let statusClass = t.status === 'new' ? 'status-new' : (t.status === 'processing' ? 'status-processing' : 'status-resolved');
             let statusText = t.status === 'new' ? 'Новое' : (t.status === 'processing' ? 'В обработке' : 'Решено');
-            ticketsHtml += `<div class="ticket-card">
-                <div class="ticket-status ${statusClass}">${statusText}</div>
-                <div style="font-weight:600;">${escapeHtml(t.topic)}</div>
-                <div style="font-size:13px; color:var(--text-muted); margin:5px 0;">${escapeHtml(t.message)}</div>
-                <div style="font-size:11px; color:var(--text-muted);">${t.date}</div>
-            </div>`;
+            ticketsHtml += `<div class="ticket-card"><div class="ticket-status ${statusClass}">${statusText}</div><div style="font-weight:600;">${escapeHtml(t.topic)}</div><div style="font-size:13px; color:var(--text-muted); margin:5px 0;">${escapeHtml(t.message)}</div><div style="font-size:11px; color:var(--text-muted);">${t.date}</div></div>`;
         });
         ticketsHtml += '</div>';
     }
@@ -693,13 +674,7 @@ function renderSupportPage() {
         <p>Если у вас возникли проблемы с заказом, доставкой или работой сайта — напишите нам. Мы ответим в течение 24 часов.</p>
         <form id="supportForm">
             <input type="text" id="supportTopic" placeholder="Тема обращения" required>
-            <select id="supportCategory" required>
-                <option value="">Выберите категорию</option>
-                <option value="order">Проблема с заказом</option>
-                <option value="delivery">Вопрос о доставке</option>
-                <option value="payment">Оплата</option>
-                <option value="other">Другое</option>
-            </select>
+            <select id="supportCategory" required><option value="">Выберите категорию</option><option value="order">Проблема с заказом</option><option value="delivery">Вопрос о доставке</option><option value="payment">Оплата</option><option value="other">Другое</option></select>
             <textarea id="supportMessage" rows="4" placeholder="Опишите вашу проблему подробно..." required></textarea>
             <button type="submit" class="btn-primary" style="width:100%;">Отправить обращение</button>
         </form>
@@ -716,27 +691,14 @@ function initSupportForm() {
     if (form) {
         form.addEventListener('submit', (e) => {
             e.preventDefault();
-            if (!currentUser) {
-                alert('Пожалуйста, войдите в аккаунт, чтобы отправить обращение');
-                navigate('login');
-                return;
-            }
+            if (!currentUser) { alert('Войдите в аккаунт'); navigate('login'); return; }
             const topic = document.getElementById('supportTopic').value;
             const category = document.getElementById('supportCategory').value;
             const message = document.getElementById('supportMessage').value;
             if (!topic || !category || !message) { alert('Заполните все поля'); return; }
-            supportTickets.push({
-                id: Date.now(),
-                userId: currentUser.login,
-                userName: currentUser.name,
-                topic: topic,
-                category: category,
-                message: message,
-                status: 'new',
-                date: new Date().toLocaleString('ru-RU')
-            });
+            supportTickets.push({ id: Date.now(), userId: currentUser.login, userName: currentUser.name, topic, category, message, status: 'new', date: new Date().toLocaleString('ru-RU') });
             saveTickets();
-            alert('Обращение отправлено! Мы свяжемся с вами в ближайшее время.');
+            alert('Обращение отправлено!');
             document.getElementById('supportForm').reset();
             document.getElementById('content').innerHTML = renderSupportPage();
             initSupportForm();
@@ -755,7 +717,7 @@ function renderCart() {
         total += sum;
         html += `<tr><td width="80"><img src="${p.image}" style="width:60px; height:80px; object-fit:contain; border-radius:8px;"></td><td><strong>${escapeHtml(p.title)}</strong><br><small>${escapeHtml(p.author)}</small></td><td>${cart[id]} шт.</td><td>${sum.toFixed(2)} р.</td><td><button style="color:var(--accent); background:none; border:none; font-size:22px; cursor:pointer;" onclick="removeFromCart(${id})">✕</button></td></tr>`;
     }
-    html += `</td><div class="cart-total">Итого: ${total.toFixed(2)} р.</div><div class="cart-actions"><button class="btn-outline" onclick="clearCart()">Очистить корзину</button>${currentUser ? `<button class="btn-primary" onclick="navigate('delivery')">Оформить заказ</button>` : `<button class="btn-primary" onclick="alert('Войдите в аккаунт для оформления заказа')">Войти для заказа</button>`}</div>`;
+    html += `<table><div class="cart-total">Итого: ${total.toFixed(2)} р.</div><div class="cart-actions"><button class="btn-outline" onclick="clearCart()">Очистить корзину</button>${currentUser ? `<button class="btn-primary" onclick="navigate('delivery')">Оформить заказ</button>` : `<button class="btn-primary" onclick="alert('Войдите в аккаунт')">Войти</button>`}</div>`;
     return html;
 }
 
@@ -770,8 +732,8 @@ function renderDeliveryForm() {
             <div class="delivery-form-group"><label>Адрес доставки</label><input type="text" id="address" placeholder="г. Бобруйск, ул. Примерная, д. 1, кв. 1" required></div>
             <div class="delivery-row"><div class="delivery-form-group"><label>Способ доставки</label><select id="delivery_method" required><option value="">Выберите способ</option><option value="Курьером по Бобруйску">Курьером по Бобруйску — 5 р.</option><option value="Почта Беларуси">Почта Беларуси — от 3 р.</option><option value="Самовывоз">Самовывоз (Бобруйск, ул. Книжная, 12) — бесплатно</option></select></div>
             <div class="delivery-form-group"><label>Способ оплаты</label><select id="payment_method" required><option value="">Выберите способ</option><option value="Картой онлайн">Картой онлайн</option><option value="Наличными при получении">Наличными при получении</option><option value="Банковский перевод">Банковский перевод</option></select></div></div>
-            <div class="delivery-form-group"><label>Комментарий к заказу (необязательно)</label><textarea id="comment" rows="3" placeholder="Укажите удобное время доставки или другую важную информацию..."></textarea></div>
-            <div class="delivery-actions"><button type="button" class="btn-outline" onclick="navigate('cart')">Назад в корзину</button><button type="submit" class="btn-primary">Продолжить оформление →</button></div>
+            <div class="delivery-form-group"><label>Комментарий к заказу (необязательно)</label><textarea id="comment" rows="3" placeholder="Укажите удобное время доставки..."></textarea></div>
+            <div class="delivery-actions"><button type="button" class="btn-outline" onclick="navigate('cart')">Назад в корзину</button><button type="submit" class="btn-primary">Продолжить →</button></div>
         </form>
     </div>`;
 }
@@ -781,26 +743,20 @@ function renderCheckout() {
     for (let id in cart) { const p = products.find(x => x.id == id); if(p) total += p.price * cart[id]; }
     return `<h1>Подтверждение заказа</h1>
     <div class="delivery-container">
-        <h2>Проверьте данные заказа</h2>
-        <p class="subtitle" style="color:var(--text-muted); margin-bottom:32px;">Пожалуйста, убедитесь, что все данные верны</p>
         <div style="margin: 20px 0; padding: 20px; background: var(--accent-light); border-radius: 20px;">
             <p><strong>ФИО:</strong> ${escapeHtml(deliveryData.fullname || '')}</p>
-            <p><strong>Телефон:</strong> ${escapeHtml(deliveryData.phone || '')}</p>
-            <p><strong>Email:</strong> ${escapeHtml(deliveryData.email || '')}</p>
             <p><strong>Адрес:</strong> ${escapeHtml(deliveryData.address || '')}</p>
             <p><strong>Доставка:</strong> ${escapeHtml(deliveryData.delivery_method || '')}</p>
-            <p><strong>Оплата:</strong> ${escapeHtml(deliveryData.payment_method || '')}</p>
-            <p><strong>Комментарий:</strong> ${escapeHtml(deliveryData.comment || '')}</p>
-            <p><strong>Сумма заказа:</strong> <span style="font-size: 24px; font-weight: 700; color: var(--accent);">${total.toFixed(2)} р.</span></p>
+            <p><strong>Сумма:</strong> <span style="font-size: 24px; font-weight: 700; color: var(--accent);">${total.toFixed(2)} р.</span></p>
         </div>
-        <div class="delivery-actions"><button class="btn-outline" onclick="navigate('delivery')">Назад</button><button class="btn-primary" onclick="confirmOrder()">Подтвердить заказ</button></div>
+        <div class="delivery-actions"><button class="btn-outline" onclick="navigate('delivery')">Назад</button><button class="btn-primary" onclick="confirmOrder()">Подтвердить</button></div>
     </div>`; 
 }
 
 function confirmOrder() { 
     let total = 0;
     for (let id in cart) { const p = products.find(x => x.id == id); if(p) total += p.price * cart[id]; }
-    alert(`✅ Заказ оформлен!\n\nСумма: ${total.toFixed(2)} р.\nДоставка: ${deliveryData.delivery_method || 'не выбрана'}\n\nСпасибо за покупку!`); 
+    alert(`✅ Заказ оформлен!\nСумма: ${total.toFixed(2)} р.\nСпасибо за покупку!`); 
     cart = {}; deliveryData = {}; localStorage.removeItem('cart'); localStorage.removeItem('deliveryData'); 
     navigate('home'); 
 }
@@ -812,13 +768,13 @@ function renderLogin() {
         <input type="text" id="loginUsername" placeholder="Логин">
         <input type="password" id="loginPassword" placeholder="Пароль">
         <button class="btn-primary" style="width:100%;" onclick="handleLogin()">Войти</button>
-        <p style="margin-top:20px; text-align:center">Нет аккаунта? <a onclick="navigate('register')" style="cursor:pointer; color:var(--accent); font-weight:600;">Зарегистрироваться</a></p>
+        <p style="margin-top:20px; text-align:center">Нет аккаунта? <a onclick="navigate('register')" style="cursor:pointer; color:var(--accent);">Регистрация</a></p>
     </div>`; 
 }
 
 function handleLogin() { 
-    const l = document.getElementById('loginUsername').value; 
-    const p = document.getElementById('loginPassword').value; 
+    const l = document.getElementById('loginUsername')?.value; 
+    const p = document.getElementById('loginPassword')?.value; 
     const err = loginUser(l,p); 
     if(err) document.getElementById('loginError').innerText = err; 
     else navigate('home'); 
@@ -829,17 +785,17 @@ function renderRegister() {
     <div class="form-container">
         <div id="regError" class="error"></div>
         <input type="text" id="regLogin" placeholder="Логин">
-        <input type="password" id="regPass" placeholder="Пароль (мин. 4 символа)">
+        <input type="password" id="regPass" placeholder="Пароль (мин. 4)">
         <input type="text" id="regName" placeholder="Ваше имя">
         <button class="btn-primary" style="width:100%;" onclick="handleRegister()">Зарегистрироваться</button>
-        <p style="margin-top:20px; text-align:center">Уже есть аккаунт? <a onclick="navigate('login')" style="cursor:pointer; color:var(--accent); font-weight:600;">Войти</a></p>
+        <p style="margin-top:20px; text-align:center">Уже есть аккаунт? <a onclick="navigate('login')" style="cursor:pointer; color:var(--accent);">Войти</a></p>
     </div>`; 
 }
 
 function handleRegister() { 
-    const l = document.getElementById('regLogin').value; 
-    const p = document.getElementById('regPass').value; 
-    const n = document.getElementById('regName').value; 
+    const l = document.getElementById('regLogin')?.value; 
+    const p = document.getElementById('regPass')?.value; 
+    const n = document.getElementById('regName')?.value; 
     const err = registerUser(l,p,n); 
     if(err) document.getElementById('regError').innerText = err; 
     else navigate('home'); 
@@ -878,32 +834,6 @@ function searchBooks() {
     document.getElementById('content').innerHTML = `<h1>Результаты поиска</h1>${renderProductsGrid(filtered)}`; 
     renderUserLinks(); updateCartCount(); 
 }
-
-// СКРЫВАЮЩАЯСЯ ШАПКА
-let lastScrollTop = 0;
-let headerEl = document.getElementById('mainHeader');
-function handleScroll() {
-    let scrollTop = window.pageYOffset || document.documentElement.scrollTop;
-    let scrollPercent = (scrollTop / (document.documentElement.scrollHeight - window.innerHeight)) * 100;
-    document.getElementById('scrollIndicator').style.width = scrollPercent + '%';
-    if (scrollTop > 100) {
-        if (scrollTop > lastScrollTop) headerEl.classList.add('hidden');
-        else headerEl.classList.remove('hidden');
-    } else headerEl.classList.remove('hidden');
-    lastScrollTop = scrollTop;
-}
-window.addEventListener('scroll', handleScroll);
-
-// МОБИЛЬНОЕ МЕНЮ
-let isMobileMenuOpen = false;
-function toggleMobileMenu() {
-    if (window.innerWidth <= 800) {
-        if (isMobileMenuOpen) { headerEl.classList.remove('hidden'); headerEl.style.transform = ''; document.getElementById('menuToggleBtn').innerHTML = '☰'; isMobileMenuOpen = false; }
-        else { headerEl.classList.remove('hidden'); headerEl.style.transform = 'translateY(0)'; document.getElementById('menuToggleBtn').innerHTML = '✕'; isMobileMenuOpen = true; }
-    }
-}
-document.addEventListener('click', function(e) { if (window.innerWidth <= 800 && isMobileMenuOpen && !headerEl.contains(e.target) && e.target !== document.getElementById('menuToggleBtn')) toggleMobileMenu(); });
-window.addEventListener('resize', function() { if (window.innerWidth > 800) { headerEl.classList.remove('hidden'); headerEl.style.transform = ''; isMobileMenuOpen = false; document.getElementById('menuToggleBtn').innerHTML = '☰'; } });
 
 document.addEventListener('DOMContentLoaded', () => { renderHomePage(); window.changeSlide = changeSlide; });
 </script>
