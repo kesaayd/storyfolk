@@ -93,18 +93,20 @@
         
         /* Кнопка сворачивания навигации */
         .nav-toggle-btn {
-            background: none;
-            border: none;
-            font-size: 16px;
+            background: var(--accent-light);
+            border: 1px solid var(--border-color);
+            font-size: 14px;
             cursor: pointer;
             color: var(--accent);
             padding: 8px 16px;
             transition: 0.2s;
             font-weight: 500;
             border-radius: 40px;
+            white-space: nowrap;
         }
         .nav-toggle-btn:hover {
-            background: var(--accent-light);
+            background: var(--accent);
+            color: white;
         }
         
         /* Сворачиваемая область */
@@ -292,22 +294,73 @@
         .error { color: #e74c3c; font-size: 14px; margin-top: 5px; }
         .footer { background: var(--footer-bg); padding: 32px 48px; text-align: center; border-top: 1px solid var(--border-color); margin-top: 70px; color: var(--text-muted); font-size: 14px; }
         
+        /* ТОЛЬКО ДЛЯ ТЕЛЕФОНА — стрелочка видна, остальное без изменений */
         @media (max-width: 800px) {
-            .container { padding: 20px; }
-            .header { padding: 12px 20px; flex-wrap: wrap; }
-            .nav-collapsible { flex-direction: column; width: 100%; }
-            .nav { flex-direction: column; align-items: center; gap: 12px; }
-            .search { width: 100%; }
-            .search input { flex: 1; }
-            .user-links { flex-wrap: wrap; justify-content: center; }
-            .hero-slider { height: 280px; }
-            .slide { padding: 24px; }
-            .slide-content h2 { font-size: 28px; }
-            .random-book { flex-direction: column; text-align: center; margin: 32px 0; }
-            .random-book-actions { justify-content: center; }
-            .product-detail { flex-direction: column; padding: 28px; }
-            .detail-image { flex: auto; }
-            .delivery-row { grid-template-columns: 1fr; }
+            .header {
+                padding: 12px 20px;
+                flex-wrap: wrap;
+            }
+            .nav-collapsible {
+                order: 3;
+                width: 100%;
+                flex-direction: column;
+                align-items: stretch;
+            }
+            .nav {
+                flex-direction: column;
+                align-items: center;
+                gap: 12px;
+            }
+            .search {
+                width: 100%;
+            }
+            .search input {
+                flex: 1;
+                width: auto;
+            }
+            .user-links {
+                justify-content: center;
+                flex-wrap: wrap;
+            }
+            .container {
+                padding: 20px;
+            }
+            .products-grid {
+                gap: 16px;
+            }
+            .hero-slider {
+                height: 280px;
+            }
+            .slide {
+                padding: 24px;
+            }
+            .slide-content h2 {
+                font-size: 28px;
+            }
+            .random-book {
+                flex-direction: column;
+                text-align: center;
+                padding: 24px;
+            }
+            .random-book-actions {
+                justify-content: center;
+            }
+            .product-detail {
+                flex-direction: column;
+                padding: 24px;
+            }
+            .detail-image {
+                flex: auto;
+            }
+            .delivery-row {
+                grid-template-columns: 1fr;
+            }
+            .shop-info, .developer-section {
+                padding: 24px;
+            }
+            .support-form {
+                padding: 24px;
+            }
         }
     </style>
 </head>
@@ -359,28 +412,28 @@ function toggleTheme() {
 }
 if (localStorage.getItem('theme') === 'dark') document.body.classList.add('dark');
 
-// ТОВАРЫ
+// ТОВАРЫ (все 20 книг с полными данными)
 const products = [
     { id: 1, title: 'Диск с учебной программой "ПДД"', author: 'Обучающая программа, 2025', genre: 'обучение', price: 21.24, old_price: 0, rating: 4.86, reviews: 83, image: 'prod1.jpg', is_new: false, is_sale: false, description: 'Современный интерактивный курс по Правилам дорожного движения Республики Беларусь. Включает обновлённую теоретическую базу с комментариями опытных инструкторов. Более 800 экзаменационных вопросов с детальными разборами ошибок. Видеолекции и 3D-симуляции сложных перекрёстков. Подходит для подготовки к экзаменам в ГАИ с нуля.' },
     { id: 2, title: 'Золотая клетка. Плен', author: 'Индира Искендер, 2025', genre: 'романтика', price: 14.41, old_price: 24.02, rating: 4.82, reviews: 48, image: 'prod2.jpg', is_new: false, is_sale: true, description: 'Пронзительная история о девушке, заключившей контракт с богатым наследником. Роскошный особняк, бриллианты и власть оказываются ловушкой для её сердца. Постепенно главная героиня понимает, что истинная свобода — не в материальных благах, а в праве выбора.' },
     { id: 3, title: 'Каляндар настольны на 2026', author: 'Канцылярская фабрыка, 2025', genre: 'хобби', price: 27.44, old_price: 68.60, rating: 4.82, reviews: 48, image: 'prod3.jpg', is_new: false, is_sale: true, description: 'Эксклюзивный настольный календарь на 2026 год, созданный белорусскими художниками. Каждый месяц сопровождается уникальной иллюстрацией с национальными орнаментами. Плотная мелованная бумага, тиснение фольгой и удобная подставка.' },
     { id: 4, title: 'Гностические мистерии Пистис Софии', author: 'Ян ван Рэйкенборг, 2024', genre: 'философия', price: 42.96, old_price: 48.27, rating: 4.90, reviews: 23, image: 'prod4.jpg', is_new: true, is_sale: true, description: 'Фундаментальное исследование одного из самых загадочных гностических текстов раннего христианства. Автор анализирует миф о падении и восхождении Софии через призму юнгианской психологии.' },
-    { id: 5, title: 'Мастер и Маргарита', author: 'Михаил Булгаков, 1967', genre: 'классика', price: 25.00, old_price: 0, rating: 4.95, reviews: 156, image: 'book1.jpg', is_new: false, is_sale: false, description: 'Великий роман Михаила Булгакова — многослойная сатира, мистическая драма и история вечной любви. Воланд со своей свитой прибывает в Москву 1930-х годов, обнажая пороки советского общества.' },
-    { id: 6, title: '451° по Фаренгейту', author: 'Рэй Брэдбери, 1953', genre: 'фантастика', price: 22.00, old_price: 0, rating: 4.88, reviews: 92, image: 'book2.jpg', is_new: true, is_sale: false, description: 'Классическая антиутопия о мире, где книги запрещены, а пожарные сжигают любые печатные источники знаний.' },
-    { id: 7, title: 'Гарри Поттер и философский камень', author: 'Джоан Роулинг, 1997', genre: 'фэнтези', price: 30.00, old_price: 45.00, rating: 4.97, reviews: 234, image: 'book3.jpg', is_new: false, is_sale: true, description: 'Первая книга легендарной серии о мальчике, который выжил. Гарри Поттер узнаёт, что он волшебник, и поступает в Хогвартс.' },
-    { id: 8, title: '1984', author: 'Джордж Оруэлл, 1949', genre: 'антиутопия', price: 23.00, old_price: 0, rating: 4.92, reviews: 178, image: 'book5.jpg', is_new: false, is_sale: false, description: 'Мрачное предупреждение о тоталитарном обществе, где Большой Брат следит за каждым шагом.' },
-    { id: 9, title: 'Цветы для Элджернона', author: 'Дэниел Киз, 1959', genre: 'драма', price: 27.00, old_price: 38.00, rating: 4.89, reviews: 67, image: 'book6.jpg', is_new: false, is_sale: true, description: 'Трогательный роман в дневниковой форме о мужчине с низким IQ, который становится подопытным в эксперименте.' },
-    { id: 10, title: 'Дюна', author: 'Фрэнк Герберт, 1965', genre: 'фантастика', price: 35.00, old_price: 0, rating: 4.85, reviews: 112, image: 'book7.jpg', is_new: false, is_sale: false, description: 'Эпическая сага о пустынной планете Арракис — единственном источнике меланжа.' },
-    { id: 11, title: 'Война и мир', author: 'Лев Толстой, 1869', genre: 'классика', price: 28.00, old_price: 0, rating: 4.91, reviews: 203, image: 'book8.jpg', is_new: true, is_sale: false, description: 'Величайшее произведение Льва Толстого, охватывающее события наполеоновских войн.' },
-    { id: 12, title: 'Портрет Дориана Грея', author: 'Оскар Уайльд, 1890', genre: 'классика', price: 21.00, old_price: 0, rating: 4.87, reviews: 88, image: 'book9.jpg', is_new: false, is_sale: false, description: 'Единственный роман Оскара Уайльда о красоте, морали и бессмертии.' },
-    { id: 13, title: 'Оно', author: 'Стивен Кинг, 1986', genre: 'ужасы', price: 32.00, old_price: 48.00, rating: 4.79, reviews: 145, image: 'horror1.jpg', is_new: false, is_sale: true, description: 'Легендарный роман ужасов о чудовище, которое просыпается в городке Дерри.' },
-    { id: 14, title: 'Гордость и предубеждение', author: 'Джейн Остин, 1813', genre: 'романтика', price: 19.50, old_price: 0, rating: 4.94, reviews: 210, image: 'pride.jpg', is_new: false, is_sale: false, description: 'Изысканный роман нравов о семье Беннет.' },
-    { id: 15, title: 'Ведьмак. Последнее желание', author: 'Анджей Сапковский, 1993', genre: 'фэнтези', price: 32.00, old_price: 0, rating: 4.93, reviews: 267, image: 'the_witcher.jpg', is_new: true, is_sale: false, description: 'Первый сборник рассказов о ведьмаке Геральте из Ривии.' },
-    { id: 16, title: 'Три товарища', author: 'Эрих Мария Ремарк, 1936', genre: 'драма', price: 26.50, old_price: 0, rating: 4.96, reviews: 189, image: 'three_comrades.jpg', is_new: false, is_sale: false, description: 'Роман о дружбе, любви и потерях в Германии между двумя мировыми войнами.' },
-    { id: 17, title: 'Убийство в "Восточном экспрессе"', author: 'Агата Кристи, 1934', genre: 'детектив', price: 24.90, old_price: 0, rating: 4.89, reviews: 142, image: 'murder_on_orient_express.jpg', is_new: false, is_sale: true, description: 'Эркюль Пуаро расследует убийство в роскошном поезде.' },
-    { id: 18, title: 'Алиса в Стране чудес', author: 'Льюис Кэрролл, 1865', genre: 'классика', price: 20.00, old_price: 0, rating: 4.85, reviews: 198, image: 'alice.jpg', is_new: true, is_sale: false, description: 'Бессмертная сказка о приключениях Алисы в мире чудес.' },
-    { id: 19, title: 'Комедии. Ревизор', author: 'Николай Гоголь, 1836', genre: 'комедия', price: 18.00, old_price: 0, rating: 4.83, reviews: 96, image: 'gogol.jpg', is_new: false, is_sale: false, description: 'Сатирическая комедия о чиновниках, которые принимают проезжего за ревизора.' },
-    { id: 20, title: '12 стульев', author: 'Ильф и Петров, 1928', genre: 'комедия', price: 24.00, old_price: 35.00, rating: 4.90, reviews: 112, image: 'chairs.jpg', is_new: false, is_sale: true, description: 'Остап Бендер ищет бриллианты, спрятанные в одном из двенадцати стульев.' }
+    { id: 5, title: 'Мастер и Маргарита', author: 'Михаил Булгаков, 1967', genre: 'классика', price: 25.00, old_price: 0, rating: 4.95, reviews: 156, image: 'book1.jpg', is_new: false, is_sale: false, description: 'Великий роман Михаила Булгакова — многослойная сатира, мистическая драма и история вечной любви. Воланд со своей свитой прибывает в Москву 1930-х годов, обнажая пороки советского общества. Параллельно разворачивается ершалаимская линия о Понтии Пилате и Иешуа.' },
+    { id: 6, title: '451° по Фаренгейту', author: 'Рэй Брэдбери, 1953', genre: 'фантастика', price: 22.00, old_price: 0, rating: 4.88, reviews: 92, image: 'book2.jpg', is_new: true, is_sale: false, description: 'Классическая антиутопия о мире, где книги запрещены, а пожарные сжигают любые печатные источники знаний. Главный герой — пожарный Монтэг — начинает сомневаться в правильности своей работы.' },
+    { id: 7, title: 'Гарри Поттер и философский камень', author: 'Джоан Роулинг, 1997', genre: 'фэнтези', price: 30.00, old_price: 45.00, rating: 4.97, reviews: 234, image: 'book3.jpg', is_new: false, is_sale: true, description: 'Первая книга легендарной серии о мальчике, который выжил. Гарри Поттер узнаёт, что он волшебник, и поступает в Хогвартс — школу чародейства и волшебства. Там его ждут верные друзья Рон и Гермиона.' },
+    { id: 8, title: '1984', author: 'Джордж Оруэлл, 1949', genre: 'антиутопия', price: 23.00, old_price: 0, rating: 4.92, reviews: 178, image: 'book5.jpg', is_new: false, is_sale: false, description: 'Мрачное предупреждение о тоталитарном обществе, где Большой Брат следит за каждым шагом. Уинстон Смит работает в Министерстве правды, переписывая историю, но втайне мечтает о свободе.' },
+    { id: 9, title: 'Цветы для Элджернона', author: 'Дэниел Киз, 1959', genre: 'драма', price: 27.00, old_price: 38.00, rating: 4.89, reviews: 67, image: 'book6.jpg', is_new: false, is_sale: true, description: 'Трогательный роман в дневниковой форме о мужчине с низким IQ, который становится подопытным в эксперименте по повышению интеллекта. Чарли Гордон превращается в гения, но с ужасом осознаёт, что эффект обратим.' },
+    { id: 10, title: 'Дюна', author: 'Фрэнк Герберт, 1965', genre: 'фантастика', price: 35.00, old_price: 0, rating: 4.85, reviews: 112, image: 'book7.jpg', is_new: false, is_sale: false, description: 'Эпическая сага о пустынной планете Арракис — единственном источнике меланжа, самой ценной субстанции во Вселенной. Молодой Пол Атрейдес вынужден бежать после предательства и найти убежище среди фрименов.' },
+    { id: 11, title: 'Война и мир', author: 'Лев Толстой, 1869', genre: 'классика', price: 28.00, old_price: 0, rating: 4.91, reviews: 203, image: 'book8.jpg', is_new: true, is_sale: false, description: 'Величайшее произведение Льва Толстого, охватывающее пятнадцатилетний период истории России (1805–1820). На фоне наполеоновских войн разворачиваются судьбы Андрея Болконского, Пьера Безухова и Наташи Ростовой.' },
+    { id: 12, title: 'Портрет Дориана Грея', author: 'Оскар Уайльд, 1890', genre: 'классика', price: 21.00, old_price: 0, rating: 4.87, reviews: 88, image: 'book9.jpg', is_new: false, is_sale: false, description: 'Единственный роман Оскара Уайльда, вызвавший скандал в викторианском обществе. Красавец Дориан Грей загадывает желание оставаться вечно молодым, пока его портрет стареет и собирает все последствия его грехов.' },
+    { id: 13, title: 'Оно', author: 'Стивен Кинг, 1986', genre: 'ужасы', price: 32.00, old_price: 48.00, rating: 4.79, reviews: 145, image: 'horror1.jpg', is_new: false, is_sale: true, description: 'Легендарный роман ужасов о чудовище, которое просыпается в городке Дерри каждые 27 лет. Клоун Пеннивайз питается детскими страхами, принимая облик самого жуткого для жертвы существа.' },
+    { id: 14, title: 'Гордость и предубеждение', author: 'Джейн Остин, 1813', genre: 'романтика', price: 19.50, old_price: 0, rating: 4.94, reviews: 210, image: 'pride.jpg', is_new: false, is_sale: false, description: 'Изысканный роман нравов о семье Беннет, где пять дочерей ищут выгодные партии. Остроумная Элизабет Беннет и гордый мистер Дарси проходят через взаимные заблуждения и предрассудки.' },
+    { id: 15, title: 'Ведьмак. Последнее желание', author: 'Анджей Сапковский, 1993', genre: 'фэнтези', price: 32.00, old_price: 0, rating: 4.93, reviews: 267, image: 'the_witcher.jpg', is_new: true, is_sale: false, description: 'Первый сборник рассказов о ведьмаке Геральте из Ривии — мутанте, созданном для убийства монстров. В отличие от стереотипов, Геральт часто оказывается перед моральным выбором.' },
+    { id: 16, title: 'Три товарища', author: 'Эрих Мария Ремарк, 1936', genre: 'драма', price: 26.50, old_price: 0, rating: 4.96, reviews: 189, image: 'three_comrades.jpg', is_new: false, is_sale: false, description: 'Роман о дружбе, любви и потерях в Германии между двумя мировыми войнами. Роберт, Отто и Готтфрид — бывшие фронтовики, пытающиеся сохранить человеческое достоинство.' },
+    { id: 17, title: 'Убийство в "Восточном экспрессе"', author: 'Агата Кристи, 1934', genre: 'детектив', price: 24.90, old_price: 0, rating: 4.89, reviews: 142, image: 'murder_on_orient_express.jpg', is_new: false, is_sale: true, description: 'Один из самых известных романов королевы детектива. Бельгийский сыщик Эркюль Пуаро путешествует на роскошном поезде "Восточный экспресс", который застревает в снегах.' },
+    { id: 18, title: 'Алиса в Стране чудес', author: 'Льюис Кэрролл, 1865', genre: 'классика', price: 20.00, old_price: 0, rating: 4.85, reviews: 198, image: 'alice.jpg', is_new: true, is_sale: false, description: 'Бессмертная сказка, полная абсурда, математических шуток и философских парадоксов. Алиса проваливается в кроличью нору и попадает в мир, где физика и логика работают по своим странным законам.' },
+    { id: 19, title: 'Комедии. Ревизор', author: 'Николай Гоголь, 1836', genre: 'комедия', price: 18.00, old_price: 0, rating: 4.83, reviews: 96, image: 'gogol.jpg', is_new: false, is_sale: false, description: 'Бессмертная сатирическая комедия о чиновниках уездного города, которые принимают проезжего петербургского чиновника за ревизора. Хлестаков, мелкий чиновник, случайно пользуется ситуацией.' },
+    { id: 20, title: '12 стульев', author: 'Ильф и Петров, 1928', genre: 'комедия', price: 24.00, old_price: 35.00, rating: 4.90, reviews: 112, image: 'chairs.jpg', is_new: false, is_sale: true, description: 'Блистательная сатирическая одиссея по Советской России эпохи НЭПа. "Великий комбинатор" Остап Бендер вместе с Кисой Воробьяниновым ищут бриллианты, спрятанные в одном из двенадцати стульев гостиного гарнитура.' }
 ];
 
 // ОТЗЫВЫ
@@ -649,7 +702,7 @@ function renderAboutUnified() {
             <h3>Разработчик проекта</h3>
             <div class="dev-grid">
                 <div class="dev-photo"><img src="19.jpg" onerror="this.src='https://placehold.co/150x150?text=Фото'"><p>Моисеева Ксения</p></div>
-                <div class="dev-info"><table class="dev-table"><tr><td style="color:var(--accent); font-weight:600;">Код специальности</td><td>5-04-0612-02 «Разработка и сопровождение ПО»</td></tr><tr><td style="color:var(--accent); font-weight:600;">Код разработчика</td><td>19</td></tr><tr><td style="color:var(--accent); font-weight:600;">ФИО</td><td>Моисеева Ксения Юрьевна</td></tr><tr><td style="color:var(--accent); font-weight:600;">Тема сайта</td><td>Интернет-магазин книг StoryFolk</td></tr><tr><td style="color:var(--accent); font-weight:600;">Дата создания</td><td>04.05.2026</td></tr></table></div>
+                <div class="dev-info"><table class="dev-table"><tr><td style="color:var(--accent); font-weight:600;">Код специальности</td><td>5-04-0612-02 «Разработка и сопровождение программного обеспечения информационных технологий»</td></tr><tr><td style="color:var(--accent); font-weight:600;">Код разработчика</td><td>19</td></tr><tr><td style="color:var(--accent); font-weight:600;">ФИО</td><td>Моисеева Ксения Юрьевна</td></tr><tr><td style="color:var(--accent); font-weight:600;">Тема сайта</td><td>Интернет-магазин книг StoryFolk</td></tr><tr><td style="color:var(--accent); font-weight:600;">Дата создания</td><td>04.05.2026</td></tr></table></div>
             </div>
             <div class="copyright">© 2026 Моисеева Ксения. Все права защищены.</div>
         </div>
@@ -717,7 +770,7 @@ function renderCart() {
         total += sum;
         html += `<tr><td width="80"><img src="${p.image}" style="width:60px; height:80px; object-fit:contain; border-radius:8px;"></td><td><strong>${escapeHtml(p.title)}</strong><br><small>${escapeHtml(p.author)}</small></td><td>${cart[id]} шт.</td><td>${sum.toFixed(2)} р.</td><td><button style="color:var(--accent); background:none; border:none; font-size:22px; cursor:pointer;" onclick="removeFromCart(${id})">✕</button></td></tr>`;
     }
-    html += `<table><div class="cart-total">Итого: ${total.toFixed(2)} р.</div><div class="cart-actions"><button class="btn-outline" onclick="clearCart()">Очистить корзину</button>${currentUser ? `<button class="btn-primary" onclick="navigate('delivery')">Оформить заказ</button>` : `<button class="btn-primary" onclick="alert('Войдите в аккаунт')">Войти</button>`}</div>`;
+    html += `<tr><div class="cart-total">Итого: ${total.toFixed(2)} р.</div><div class="cart-actions"><button class="btn-outline" onclick="clearCart()">Очистить корзину</button>${currentUser ? `<button class="btn-primary" onclick="navigate('delivery')">Оформить заказ</button>` : `<button class="btn-primary" onclick="alert('Войдите в аккаунт')">Войти</button>`}</div>`;
     return html;
 }
 
@@ -743,6 +796,8 @@ function renderCheckout() {
     for (let id in cart) { const p = products.find(x => x.id == id); if(p) total += p.price * cart[id]; }
     return `<h1>Подтверждение заказа</h1>
     <div class="delivery-container">
+        <h2>Проверьте данные заказа</h2>
+        <p class="subtitle" style="color:var(--text-muted); margin-bottom:32px;">Пожалуйста, убедитесь, что все данные верны</p>
         <div style="margin: 20px 0; padding: 20px; background: var(--accent-light); border-radius: 20px;">
             <p><strong>ФИО:</strong> ${escapeHtml(deliveryData.fullname || '')}</p>
             <p><strong>Адрес:</strong> ${escapeHtml(deliveryData.address || '')}</p>
@@ -754,9 +809,7 @@ function renderCheckout() {
 }
 
 function confirmOrder() { 
-    let total = 0;
-    for (let id in cart) { const p = products.find(x => x.id == id); if(p) total += p.price * cart[id]; }
-    alert(`✅ Заказ оформлен!\nСумма: ${total.toFixed(2)} р.\nСпасибо за покупку!`); 
+    alert('✅ Заказ оформлен! Спасибо за покупку!'); 
     cart = {}; deliveryData = {}; localStorage.removeItem('cart'); localStorage.removeItem('deliveryData'); 
     navigate('home'); 
 }
